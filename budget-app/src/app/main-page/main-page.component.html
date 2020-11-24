@@ -3,13 +3,14 @@
 </div>
 
 <section class="total-amount-section">
-    <h2 class="green">1500</h2>
+    <h2 [ngClass]="{ 'red': totalBudget < 0, 'green': totalBudget > 0 }">{{ totalBudget }}</h2>
 </section>
 
 <section class="add-item-section">
     <div class="add-item-container">
-        <app-add-item-form></app-add-item-form>
+        <app-add-item-form (formSubmit)="addItem($event)"></app-add-item-form>
     </div>
 </section>
 <hr style="margin-top: 0px;">
-<app-budget-item-list></app-budget-item-list>
+
+<app-budget-item-list [budgetItems]="budgetItems" (delete)="deleteItem($event)" (update)="updateItem($event)"></app-budget-item-list>
